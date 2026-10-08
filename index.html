@@ -26,7 +26,6 @@
       margin-top: 40px;
       font-size: 3em;
       letter-spacing: 4px;
-      animation: glow 3s infinite ease-in-out;
     }
 
     .sidebar {
@@ -323,6 +322,109 @@
       color: #0ff;
       opacity: 0.85;
     }
+
+    .update-log-container {
+      display: none;
+      margin-left: 290px;
+      padding: 85px 34px 50px;
+      text-align: left;
+      max-width: 1050px;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .update-log-heading {
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      margin: 0 0 14px;
+      text-shadow: 0 0 12px #0ff;
+    }
+
+    .update-log-intro {
+      color: #9ce9ee;
+      line-height: 1.65;
+      margin: 0 0 27px;
+      font-size: 0.9rem;
+    }
+
+    .update-log-entry {
+      background: rgba(0, 24, 32, 0.85);
+      border: 1px solid rgba(0, 255, 255, 0.55);
+      border-radius: 14px;
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.12);
+      padding: 20px 24px;
+      margin-bottom: 18px;
+    }
+
+    .update-log-entry h3 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+    }
+
+    .update-log-date {
+      color: #86c6ca;
+      font-size: 0.73rem;
+      font-weight: normal;
+    }
+
+    .update-log-entry ul {
+      padding-left: 22px;
+      margin: 0;
+      line-height: 1.9;
+      font-size: 0.83rem;
+      color: #c7f8fa;
+    }
+
+    .update-notification {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 500;
+      width: min(370px, calc(100vw - 44px));
+      box-sizing: border-box;
+      padding: 20px 22px;
+      border: 1px solid #0ff;
+      border-radius: 14px;
+      background: #061519;
+      color: #d9fcff;
+      text-align: left;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 26px rgba(0, 255, 255, 0.4);
+    }
+
+    .update-notification strong { display: block; color: #0ff; padding-right: 20px; }
+    .update-notification p { font-size: 0.8rem; line-height: 1.6; }
+    .update-notification button {
+      font: inherit;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .update-notification .view-updates-btn {
+      background: #0ff;
+      color: #001416;
+      border: 1px solid #0ff;
+      padding: 9px 13px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .update-notification .dismiss-update-btn {
+      position: absolute;
+      top: 9px;
+      right: 10px;
+      border: 0;
+      background: transparent;
+      color: #d9fcff;
+      font-size: 1.25rem;
+      padding: 3px 8px;
+    }
+
+    @media (max-width: 650px) {
+      .update-log-container { padding: 80px 15px 40px; }
+      .update-log-entry { padding: 15px; }
+    }
   </style>
 </head>
 
@@ -331,7 +433,7 @@
   <div class="scanlines"></div>
 
   <div class="sidebar">
-    <h2>Blobe Games v2.22</h2>
+    <h2 id="siteVersionHeading">Blobe Games</h2>
 
     <div class="search-container">
       <input type="text" id="gameSearch" placeholder="SEARCH GAMES..." onkeyup="filterGames()">
@@ -342,6 +444,7 @@
     <button id="appsBtn">💻 Apps</button>
     <button id="moviesBtn">🍿 Movies</button>
     <button onclick="var w=window.open('about:blank');w.document.head.innerHTML='<title>Suggestion Form</title><link rel=\'icon\' href=\'https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png\'>';w.document.body.innerHTML='<iframe src=&quot;https://forms.gle/upkU7VuNW5r89uVn7&quot; style=&quot;position:fixed;top:0;left:0;width:100%;height:100%;border:0;&quot;></iframe>';">💡 Suggestions</button>
+    <button id="updateLogBtn">📋 Update Log</button>
     <button onclick="window.top.location.replace('https://docs.google.com/document/u/0/');">❌ Delete History</button>
 
     <div class="sort-container">
@@ -359,7 +462,13 @@
 
   <div class="game-container" id="gameContainer"></div>
 
-  <div class="folder-footer">
+  <section class="update-log-container" id="updateLogContainer" aria-label="Update Log">
+    <h1 class="update-log-heading">Update Log</h1>
+    <p class="update-log-intro" id="updateLogIntro"></p>
+    <div id="updateLogEntries"></div>
+  </section>
+
+  <div class="folder-footer" id="folderFooter">
     <button id="folderBackBtn" class="folder-back-btn" aria-label="Go back">
       <svg viewBox="0 0 24 24">
         <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
@@ -369,6 +478,100 @@
   </div>
 
   <script>
+    const SITE_VERSION = "2.24";
+    const VERSION_STORAGE_KEY = "blobe_games_ver";
+    const UPDATE_LOG = [
+      {
+        version: "2.24",
+        date: "October 8, 2026",
+        changes: [
+          "Added the Update Log page!",
+        ]
+      },
+      {
+        version: "2.23",
+        date: "October 7, 2026",
+        changes: [
+          "Fixed Block Blast.",
+          "Fixed DDLC",
+          "Fixed Cut the Rope.",
+          "Fixed Poly Track.",
+          "Added Undertale.",
+          "Added Obby Ragdoll."
+        ]
+      }
+    ];
+
+    function renderUpdateLog() {
+      document.getElementById("updateLogIntro").textContent = `See what's new in ${SITE_VERSION}.`;
+      const list = document.getElementById("updateLogEntries");
+      list.replaceChildren();
+
+      for (const entry of UPDATE_LOG) {
+        const card = document.createElement("article");
+        card.className = "update-log-entry";
+        const heading = document.createElement("h3");
+        const version = document.createElement("span");
+        version.textContent = `Version ${entry.version}`;
+        const date = document.createElement("span");
+        date.className = "update-log-date";
+        date.textContent = entry.date;
+        heading.append(version, date);
+        card.appendChild(heading);
+
+        const changes = document.createElement("ul");
+        for (const description of entry.changes) {
+          const item = document.createElement("li");
+          item.textContent = description;
+          changes.appendChild(item);
+        }
+        card.appendChild(changes);
+        list.appendChild(card);
+      }
+    }
+
+    function showUpdateNotification() {
+      if (document.getElementById("updateNotification")) return;
+      const toast = document.createElement("aside");
+      toast.id = "updateNotification";
+      toast.className = "update-notification";
+      toast.setAttribute("role", "alert");
+
+      const title = document.createElement("strong");
+      title.textContent = "There's a new update!";
+      const message = document.createElement("p");
+      message.textContent = `Blobe Games updated to v${SITE_VERSION}! Check the Update Log for more info.`;
+      const viewButton = document.createElement("button");
+      viewButton.className = "view-updates-btn";
+      viewButton.textContent = "View Update Log";
+      viewButton.onclick = () => {
+        showUpdateLog();
+        toast.remove();
+      };
+      const dismissButton = document.createElement("button");
+      dismissButton.className = "dismiss-update-btn";
+      dismissButton.setAttribute("aria-label", "Dismiss update notification");
+      dismissButton.textContent = "×";
+      dismissButton.onclick = () => toast.remove();
+
+      toast.append(title, message, viewButton, dismissButton);
+      document.body.appendChild(toast);
+    }
+
+    function checkForWebsiteUpdate() {
+      document.getElementById("siteVersionHeading").textContent =
+        `Blobe Games v${SITE_VERSION}`;
+      try {
+        const lastSeenVersion = localStorage.getItem(VERSION_STORAGE_KEY);
+        if (lastSeenVersion !== SITE_VERSION) {
+          showUpdateNotification();
+        }
+        localStorage.setItem(VERSION_STORAGE_KEY, SITE_VERSION);
+      } catch (error) {
+        console.warn("Unable to access local storage for update notices:", error);
+      }
+    }
+
     const itemsDB = [
       {
         type: "folder",
@@ -705,6 +908,29 @@
     let currentFolder = rootNode.children.find(f => f.name === activeCategoryName) || rootNode;
     let currentPath = [rootNode, currentFolder];
     let currentSortMode = "alpha";
+    let updateLogOpen = false;
+
+    function showUpdateLog() {
+      updateLogOpen = true;
+      document.getElementById("updateNotification")?.remove();
+      document.getElementById("gameContainer").style.display = "none";
+      document.getElementById("folderFooter").style.display = "none";
+      document.getElementById("updateLogContainer").style.display = "block";
+      document.querySelector(".search-container").style.display = "none";
+      document.querySelector(".sort-container").style.display = "none";
+      syncSidebarSelection();
+      renderUpdateLog();
+    }
+
+    function hideUpdateLog() {
+      if (!updateLogOpen) return;
+      updateLogOpen = false;
+      document.getElementById("gameContainer").style.display = "flex";
+      document.getElementById("folderFooter").style.display = "flex";
+      document.getElementById("updateLogContainer").style.display = "none";
+      document.querySelector(".search-container").style.display = "";
+      document.querySelector(".sort-container").style.display = "";
+    }
 
     async function resolveGameImage(game) {
       const base = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/assets/";
@@ -754,6 +980,10 @@
       };
 
       document.querySelectorAll(".sidebar button").forEach(btn => btn.classList.remove("selected"));
+      if (updateLogOpen) {
+        document.getElementById("updateLogBtn").classList.add("selected");
+        return;
+      }
       if (activeCategoryName && map[activeCategoryName]) {
         const selected = document.getElementById(map[activeCategoryName]);
         if (selected) selected.classList.add("selected");
@@ -777,6 +1007,7 @@
     }
 
     function showTopLevelFolder(name) {
+      hideUpdateLog();
       const folder = rootNode.children.find(f => f.name === name);
       if (!folder) return;
       activeCategoryName = name;
@@ -1039,8 +1270,10 @@
     document.getElementById("emulatedGamesBtn").onclick = () => showTopLevelFolder("Emulator Games");
     document.getElementById("appsBtn").onclick = () => showTopLevelFolder("Apps");
     document.getElementById("moviesBtn").onclick = () => showTopLevelFolder("Movies");
+    document.getElementById("updateLogBtn").onclick = showUpdateLog;
 
     showTopLevelFolder("HTML Games");
+    checkForWebsiteUpdate();
   </script>
 
   <script>
