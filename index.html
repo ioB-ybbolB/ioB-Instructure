@@ -226,14 +226,16 @@
       position: relative;
     }
 
-    .title-png-image {
+    .title-png-surface {
       position: absolute;
       top: -20px;
-      left: -20px;
+      left: -19px;
       display: block;
-      max-width: none;
       pointer-events: none;
       user-select: none;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: 100% 100%;
     }
 
     .scanlines {
@@ -586,9 +588,16 @@
       id: "placeholder-for-now"
     };
 
-    const SITE_VERSION = "2.25";
+    const SITE_VERSION = "2.26";
     const VERSION_STORAGE_KEY = "blobe_games_ver";
     const UPDATE_LOG = [
+      {
+        version: "2.26",
+        date: "October 25, 2026",
+        changes: [
+          "Fixed the website being flagged after a few seconds."
+        ]
+      },
       {
         version: "2.25",
         date: "October 22, 2026",
@@ -1338,7 +1347,7 @@
       });
     }
 
-    const TITLE_PNG_PADDING = 20;
+    const TITLE_PNG_PADDING = 19;
     const titlePngCache = new Map();
 
     function escapeTitleXml(value) {
@@ -1383,6 +1392,7 @@
       const width = Math.ceil(m.width + padding * 2);
       const height = Math.ceil(m.height + padding * 2);
       const prop = escapeTitleXml;
+
       const css = [
         `position:absolute`, `left:${padding}px`, `top:${padding}px`,
         `width:${m.width}px`, `margin:0`, `padding:0`,
@@ -1445,12 +1455,15 @@
       const frame = document.createElement("div");
       frame.className = "button-text title-png-frame";
       frame.style.height = measurements.height + "px";
-      const image = document.createElement("img");
-      image.className = "title-png-image";
-      image.alt = name;
-      image.draggable = false;
-      image.style.width = Math.ceil(measurements.width + TITLE_PNG_PADDING * 2) + "px";
-      frame.appendChild(image);
+      frame.setAttribute("role", "img");
+      frame.setAttribute("aria-label", name);
+
+      const surface = document.createElement("div");
+      surface.className = "title-png-surface";
+      surface.setAttribute("aria-hidden", "true");
+      surface.style.width = Math.ceil(measurements.width + TITLE_PNG_PADDING * 2) + "px";
+      surface.style.height = Math.ceil(measurements.height + TITLE_PNG_PADDING * 2) + "px";
+      frame.appendChild(surface);
 
       const cacheKey = [name, measurements.width, measurements.height, measurements.font].join("|");
       const ready = document.fonts ? document.fonts.ready : Promise.resolve();
@@ -1465,7 +1478,9 @@
         }
         return titlePngCache.get(cacheKey);
       }).then(src => {
-        if (src && image.isConnected) image.src = src;
+        if (src && surface.isConnected) {
+          surface.style.backgroundImage = 'url(' + JSON.stringify(src) + ')';
+        }
       }).catch(error => console.error("Could not render title PNG:", error));
 
       return frame;
@@ -1490,7 +1505,7 @@
 
         const btn = document.createElement("button");
         btn.className = "rounded-button" + (isFolder(node) ? " folder-button" : "");
-        btn.title = node.name;
+        btn.setAttribute("aria-label", node.name);
 
         if (isFolder(node)) {
           const icon = document.createElement("div");
