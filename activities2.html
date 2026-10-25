@@ -159,7 +159,7 @@
       text-shadow: 0 0 5px #0ff;
     }
 
-    .game-container {
+    .activities-container {
       margin-left: 280px;
       padding: 50px 20px 20px 20px;
       display: flex;
@@ -546,7 +546,7 @@
     </section>
   </div>
 
-  <div class="game-container" id="gameContainer"></div>
+  <div class="activities-container" id="activitiesContainer"></div>
 
   <section class="update-log-container" id="updateLogContainer" aria-label="Update Log">
     <h1 class="update-log-heading">Update Log</h1>
@@ -773,10 +773,10 @@
           },
           {
             type: "folder",
-            name: "World's Hardest Game",
+            name: "World's Hardest Activities",
             children: [
-              { name: "World's Hardest Game", owner: "ioB-ybbolB", repo: "worlds-hardest-game" },
-              { name: "World's Hardest Game 2", owner: "ioB-ybbolB", repo: "worlds-hardest-game-2" },
+              { name: "World's Hardest Activities", owner: "ioB-ybbolB", repo: "worlds-hardest-activities" },
+              { name: "World's Hardest Activities 2", owner: "ioB-ybbolB", repo: "worlds-hardest-activities-2" },
             ]
           },
           { name: "The Impossible Quiz", owner: "ioB-ybbolB", repo: "impossible-quiz" },
@@ -943,11 +943,11 @@
           { name: "DDLC", owner: "ioB-ybbolB", repo: "ddlc" },
           { name: "Dialed.gg", owner: "ioB-ybbolB", repo: "dialed-gg" },
           { name: "Unicycle Hero", owner: "ioB-ybbolB", repo: "unicycle-hero" },
-          { name: "Homer Saw Game", owner: "ioB-ybbolB", repo: "homer-saw-game" },
+          { name: "Homer Saw Activities", owner: "ioB-ybbolB", repo: "homer-saw-activities" },
           { name: "Poor Bunny", owner: "ioB-ybbolB", repo: "PoorBunny" },
           { name: "5 Nights with Rice", owner: "ioB-ybbolB", repo: "FiveNightsWithRice" },
           { name: "Infinite Craft", owner: "ioB-ybbolB", repo: "nova-craft" },
-          { name: "There is No Game", owner: "ioB-ybbolB", repo: "there-is-no-game" },
+          { name: "There is No Activities", owner: "ioB-ybbolB", repo: "there-is-no-activities" },
           {
             type: "folder",
             name: "Dadish",
@@ -1029,12 +1029,12 @@
           { name: "Turkish Star Wars", owner: "ioB-ybbolB", repo: "turkish-star-wars" },
           { name: "The Backrooms", owner: "ioB-ybbolB", repo: "backrooms" },
           { name: "The Super Mario Bros. Movie", owner: "ioB-ybbolB", repo: "mario-mv" },
-          { name: "Avengers: Endgame", owner: "ioB-ybbolB", repo: "avengers-endgame" }
+          { name: "Avengers: Endactivities", owner: "ioB-ybbolB", repo: "avengers-endactivities" }
         ]
       }
     ];
 
-    const GAME_IMAGE_FALLBACK = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png";
+    const ACTIVITIES_IMAGE_FALLBACK = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png";
 
     function normalizeNode(item) {
       if (item.type === "folder") {
@@ -1043,7 +1043,7 @@
           children: (item.children || []).map(normalizeNode)
         };
       }
-      return { type: "game", base: "jsdelivr", ...item };
+      return { type: "activities", base: "jsdelivr", ...item };
     }
 
     const rootNode = { 
@@ -1061,7 +1061,7 @@
     function showUpdateLog() {
       updateLogOpen = true;
       document.getElementById("updateNotification")?.remove();
-      document.getElementById("gameContainer").style.display = "none";
+      document.getElementById("activitiesContainer").style.display = "none";
       document.getElementById("folderFooter").style.display = "none";
       document.getElementById("updateLogContainer").style.display = "block";
       document.querySelector(".search-container").style.display = "none";
@@ -1073,16 +1073,16 @@
     function hideUpdateLog() {
       if (!updateLogOpen) return;
       updateLogOpen = false;
-      document.getElementById("gameContainer").style.display = "flex";
+      document.getElementById("activitiesContainer").style.display = "flex";
       document.getElementById("folderFooter").style.display = "flex";
       document.getElementById("updateLogContainer").style.display = "none";
       document.querySelector(".search-container").style.display = "";
       document.querySelector(".sort-container").style.display = "";
     }
 
-    async function resolveGameImage(game) {
+    async function resolveActivitiesImage(activities) {
       const base = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/assets/";
-      const rawTarget = game.path ? game.path : game.repo;
+      const rawTarget = activities.path ? activities.path : activities.repo;
       const targetName = rawTarget.split('/').pop();
     
       const candidates = [
@@ -1111,8 +1111,8 @@
       return !!node && node.type === "folder";
     }
 
-    function isGame(node) {
-      return !!node && node.type === "game";
+    function isActivities(node) {
+      return !!node && node.type === "activities";
     }
 
     function getCurrentSearchScope() {
@@ -1206,7 +1206,7 @@
     }
 
     function collectMatches(node, query, results = []) {
-      if (node !== rootNode && isGame(node) && nodeText(node).includes(query)) {
+      if (node !== rootNode && isActivities(node) && nodeText(node).includes(query)) {
         results.push(node);
       }
       if (isFolder(node)) {
@@ -1218,7 +1218,7 @@
     }
 
     function getDescendantActivities(node, results = []) {
-      if (isGame(node)) {
+      if (isActivities(node)) {
         results.push(node);
       } else if (isFolder(node)) {
         for (const child of (node.children || [])) {
@@ -1229,13 +1229,13 @@
     }
 
     async function applyFolderPreview(button, folder) {
-      const fallback = GAME_IMAGE_FALLBACK;
+      const fallback = ACTIVITIES_IMAGE_FALLBACK;
       const previewActivities = getDescendantActivities(folder);
       
       const uniqueUrls = [];
-      for (const game of previewActivities) {
+      for (const activities of previewActivities) {
         try {
-          const url = await resolveGameImage(game);
+          const url = await resolveActivitiesImage(activities);
           const finalUrl = url || fallback;
           if (!uniqueUrls.includes(finalUrl)) {
             uniqueUrls.push(finalUrl);
@@ -1325,7 +1325,7 @@
     }
 
     async function renderNodes(nodes) {
-      const container = document.getElementById("gameContainer");
+      const container = document.getElementById("activitiesContainer");
       container.innerHTML = "";
 
       if (!nodes.length) {
@@ -1353,10 +1353,10 @@
           applyFolderPreview(btn, node);
           btn.onclick = () => enterFolder(node);
         } else {
-          resolveGameImage(node).then(url => {
-            btn.style.backgroundImage = `url('${url || GAME_IMAGE_FALLBACK}')`;
+          resolveActivitiesImage(node).then(url => {
+            btn.style.backgroundImage = `url('${url || ACTIVITIES_IMAGE_FALLBACK}')`;
           });
-          btn.onclick = () => loadGame(node.owner, node.repo, node.name, node.base, node.path);
+          btn.onclick = () => loadActivities(node.owner, node.repo, node.name, node.base, node.path);
         }
 
         const label = document.createElement("div");
@@ -1477,18 +1477,18 @@
       return html;
     }
 
-    function injectCore(html, base, gameName) {
+    function injectCore(html, base, activitiesName) {
       html = rewriteNavigation(html);
       html = html.replace(/^\s*<!DOCTYPE[^>]*>/i, '');
 
       const hasBase = /<base\s+href=/i.test(html);
       
       const core = `${hasBase ? '' : `<base href="${base}">`}
-<title>${gameName}</title>
+<title>${activitiesName}</title>
 <script>
 function __navigate(p){
     if(!p.startsWith("http")) p = new URL(p, document.baseURI).href;
-    window.opener.__dynamicFetch(window, p, "${gameName}");
+    window.opener.__dynamicFetch(window, p, "${activitiesName}");
 }
 <\/script>`;
 
@@ -1511,19 +1511,19 @@ ${html.trim()}
       }
     }
 
-    async function __dynamicFetch(tab, url, gameName) {
+    async function __dynamicFetch(tab, url, activitiesName) {
       const res = await fetch(url);
       let html = await res.text();
       const base = url.substring(0, url.lastIndexOf("/") + 1);
       
-      html = injectCore(html, base, gameName); 
+      html = injectCore(html, base, activitiesName); 
       
       tab.document.open();
       tab.document.write(html);
       tab.document.close();
     }
 
-    async function loadGame(owner, repo, name, baseProvider = "jsdelivr", path = "") {
+    async function loadActivities(owner, repo, name, baseProvider = "jsdelivr", path = "") {
       const tab = window.open("about:blank", "_blank");
       if (!tab) return;
       const icon = tab.document.createElement("link");
