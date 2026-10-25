@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="google-adsense-account" content="ca-pub-2839804606235311">
-  <title>BlobeGames II</title>
+  <title>NotActivities II</title>
   <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -53,7 +53,7 @@
       margin-bottom: 20px;
     }
 
-    #gameSearch {
+    #Activitiesearch {
       width: 100%;
       padding: 10px;
       background: #000;
@@ -66,7 +66,7 @@
       box-sizing: border-box;
     }
 
-    #gameSearch:focus {
+    #Activitiesearch:focus {
       box-shadow: 0 0 15px #00ff00;
     }
 
@@ -511,14 +511,14 @@
   <div class="scanlines"></div>
 
   <div class="sidebar">
-    <h2 id="siteVersionHeading">Blobe Games</h2>
+    <h2 id="siteVersionHeading">Not Activities</h2>
 
     <div class="search-container">
-      <input type="text" id="gameSearch" placeholder="SEARCH GAMES..." onkeyup="filterGames()">
+      <input type="text" id="Activitiesearch" placeholder="SEARCH Activities..." onkeyup="filterActivities()">
     </div>
 
-    <button id="jsGamesBtn" class="selected">🌐 HTML Games</button>
-    <button id="emulatedGamesBtn">🎮 Emulator Games</button>
+    <button id="jsActivitiesBtn" class="selected">🌐 HTML Activities</button>
+    <button id="emulatedActivitiesBtn">🎮 Emulator Activities</button>
     <button id="appsBtn">💻 Apps</button>
     <button id="moviesBtn">🍿 Movies</button>
     <button onclick="var w=window.open('about:blank');w.document.head.innerHTML='<title>Suggestion Form</title><link rel=\'icon\' href=\'https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png\'>';w.document.body.innerHTML='<iframe src=&quot;https://forms.gle/upkU7VuNW5r89uVn7&quot; style=&quot;position:fixed;top:0;left:0;width:100%;height:100%;border:0;&quot;></iframe>';">💡 Suggestions</button>
@@ -560,7 +560,7 @@
         <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
       </svg>
     </button>
-    <div class="folder-location" id="folderLocation">root / HTML Games</div>
+    <div class="folder-location" id="folderLocation">root / HTML Activities</div>
   </div>
 
   <script>
@@ -573,14 +573,14 @@
     };
 
     const SITE_VERSION = "2.25";
-    const VERSION_STORAGE_KEY = "blobe_games_ver";
+    const VERSION_STORAGE_KEY = "Not_Activities_ver";
     const UPDATE_LOG = [
       {
         version: "2.25",
         date: "October 22, 2026",
         changes: [
           "Added NHL'27 ['97 Edition]",
-          "Added Sports Games section",
+          "Added Sports Activities section",
           "Fixed 5 Nights with Rice.",
           "Fixed Tomb of the Mask.",
           "Fixed Infinite Craft.",
@@ -612,7 +612,7 @@
     function initAnnouncementPopup() {
       const overlay = document.getElementById("announcementOverlay");
       const closeButton = document.getElementById("announcementClose");
-      const storageKey = "blobe_popup_seen_" + POPUP_CONFIG.id;
+      const storageKey = "Not_popup_seen_" + POPUP_CONFIG.id;
       let previouslySeen = false;
       if (POPUP_CONFIG.showOnce) {
         try { previouslySeen = localStorage.getItem(storageKey) === "yes"; }
@@ -681,7 +681,7 @@
       const title = document.createElement("strong");
       title.textContent = "There's a new update!";
       const message = document.createElement("p");
-      message.textContent = `Blobe Games updated to v${SITE_VERSION}! Check the Update Log for more info.`;
+      message.textContent = `Not Activities updated to v${SITE_VERSION}! Check the Update Log for more info.`;
       const viewButton = document.createElement("button");
       viewButton.className = "view-updates-btn";
       viewButton.textContent = "View Update Log";
@@ -701,7 +701,7 @@
 
     function checkForWebsiteUpdate() {
       document.getElementById("siteVersionHeading").textContent =
-        `Blobe Games v${SITE_VERSION}`;
+        `Not Activities v${SITE_VERSION}`;
       try {
         const lastSeenVersion = localStorage.getItem(VERSION_STORAGE_KEY);
         if (lastSeenVersion !== SITE_VERSION) {
@@ -716,7 +716,7 @@
     const itemsDB = [
       {
         type: "folder",
-        name: "HTML Games",
+        name: "HTML Activities",
         children: [
           {
             type: "folder",
@@ -731,7 +731,7 @@
           { name: "Snow Rider 3D", owner: "ioB-ybbolB", repo: "snow-rider-3d" },
           {
             type: "folder",
-            name: "Idle Games",
+            name: "Idle Activities",
             children: [
               { name: "Idle Breakout", owner: "ioB-ybbolB", repo: "Idle-Breakout" },
               { name: "Idle Dice", owner: "ioB-ybbolB", repo: "idle-dice" },
@@ -742,8 +742,8 @@
             name: "Slope",
             children: [
               { name: "Slope", owner: "ioB-ybbolB", repo: "Slope" },
-              { name: "Slope 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/slope2" },
-              { name: "Slope 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/slope-3-main/slope-3-main" },
+              { name: "Slope 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/slope2" },
+              { name: "Slope 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/slope-3-main/slope-3-main" },
               { name: "Slope Plus", owner: "lonfro", repo: "SlopePlusWeb" },
             ]
           },
@@ -869,7 +869,7 @@
           { name: "Temple Run 2", owner: "ioB-ybbolB", repo: "temple-run-2" },
           {
             type: "folder",
-            name: "Clicker Games",
+            name: "Clicker Activities",
             children: [
               { name: "Cookie Clicker", owner: "ioB-ybbolB", repo: "Cookie-Clicker" },
               { name: "Kiwi Clicker", owner: "ioB-ybbolB", repo: "kiwi-clicker" },
@@ -906,7 +906,7 @@
           { name: "Storm the House", owner: "ioB-ybbolB", repo: "storm-the-house" },
           {
             type: "folder",
-            name: "Eddynardo Games",
+            name: "Eddynardo Activities",
             children: [
               { name: "Choppy Orc", owner: "ioB-ybbolB", repo: "choppy-orc" },
               { name: "Sleepy Knight", owner: "ioB-ybbolB", repo: "sleepy-knight" },
@@ -930,7 +930,7 @@
             type: "folder",
             name: "Friday Night Funkin'",
             children: [
-              { name: "Friday Night Funkin'", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/friday-night-funkin" },
+              { name: "Friday Night Funkin'", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/friday-night-funkin" },
               { name: "FNF vs. AmongUs V4", owner: "ioB-ybbolB", repo: "fnf-impostor" },
             ]
           },
@@ -952,9 +952,9 @@
             type: "folder",
             name: "Dadish",
             children: [
-              { name: "Dadish", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/dadish" },
-              { name: "Dadish 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/dadish-2" },
-              { name: "Dadish 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/dadish-3" },
+              { name: "Dadish", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/dadish" },
+              { name: "Dadish 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/dadish-2" },
+              { name: "Dadish 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/dadish-3" },
             ]
           },
           {
@@ -979,7 +979,7 @@
       },
       {
         type: "folder",
-        name: "Emulator Games",
+        name: "Emulator Activities",
         children: [
           {
             type: "folder",
@@ -1005,7 +1005,7 @@
           },
           {
             type: "folder",
-            name: "Sports Games",
+            name: "Sports Activities",
             children: [
               { name: "NHL'27 ['97 Edition]", owner: "ioB-ybbolB", repo: "NHL27-97" },
             ]
@@ -1017,9 +1017,9 @@
         name: "Apps",
         children: [
           { name: "ExtPrint3r", owner: "ioB-ybbolB", repo: "printer" },
-          { name: "BlobeGPT", owner: "ioB-ybbolB", repo: "blobeGPT" },
-          { name: "Blobe scroll", owner: "ioB-ybbolB", repo: "blobe-scroll" },
-          { name: "BlobeTube", owner: "ioB-ybbolB", repo: "BlobeTube" }
+          { name: "NotGPT", owner: "ioB-ybbolB", repo: "NotGPT" },
+          { name: "Not scroll", owner: "ioB-ybbolB", repo: "Not-scroll" },
+          { name: "NotTube", owner: "ioB-ybbolB", repo: "NotTube" }
         ]
       },
       {
@@ -1052,7 +1052,7 @@
       children: itemsDB.map(normalizeNode) 
     };
 
-    let activeCategoryName = "HTML Games";
+    let activeCategoryName = "HTML Activities";
     let currentFolder = rootNode.children.find(f => f.name === activeCategoryName) || rootNode;
     let currentPath = [rootNode, currentFolder];
     let currentSortMode = "alpha";
@@ -1121,8 +1121,8 @@
 
     function syncSidebarSelection() {
       const map = {
-        "HTML Games": "jsGamesBtn",
-        "Emulator Games": "emulatedGamesBtn",
+        "HTML Activities": "jsActivitiesBtn",
+        "Emulator Activities": "emulatedActivitiesBtn",
         "Apps": "appsBtn",
         "Movies": "moviesBtn"
       };
@@ -1150,7 +1150,7 @@
     }
 
     function clearSearchBox() {
-      const input = document.getElementById("gameSearch");
+      const input = document.getElementById("Activitiesearch");
       if (input) input.value = "";
     }
 
@@ -1217,12 +1217,12 @@
       return results;
     }
 
-    function getDescendantGames(node, results = []) {
+    function getDescendantActivities(node, results = []) {
       if (isGame(node)) {
         results.push(node);
       } else if (isFolder(node)) {
         for (const child of (node.children || [])) {
-          getDescendantGames(child, results);
+          getDescendantActivities(child, results);
         }
       }
       return results;
@@ -1230,10 +1230,10 @@
 
     async function applyFolderPreview(button, folder) {
       const fallback = GAME_IMAGE_FALLBACK;
-      const previewGames = getDescendantGames(folder);
+      const previewActivities = getDescendantActivities(folder);
       
       const uniqueUrls = [];
-      for (const game of previewGames) {
+      for (const game of previewActivities) {
         try {
           const url = await resolveGameImage(game);
           const finalUrl = url || fallback;
@@ -1388,7 +1388,7 @@
     }
 
     async function renderCurrentView() {
-      const query = document.getElementById("gameSearch").value.trim().toLowerCase();
+      const query = document.getElementById("Activitiesearch").value.trim().toLowerCase();
       let nodesToRender = [];
 
       if (query) {
@@ -1402,25 +1402,25 @@
       await renderNodes(nodesToRender);
     }
 
-    function filterGames() {
+    function filterActivities() {
       renderCurrentView();
     }
 
     document.getElementById("folderBackBtn").onclick = goBack;
-    document.getElementById("gameSearch").addEventListener("keydown", (e) => {
+    document.getElementById("Activitiesearch").addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         clearSearchBox();
         renderCurrentView();
       }
     });
 
-    document.getElementById("jsGamesBtn").onclick = () => showTopLevelFolder("HTML Games");
-    document.getElementById("emulatedGamesBtn").onclick = () => showTopLevelFolder("Emulator Games");
+    document.getElementById("jsActivitiesBtn").onclick = () => showTopLevelFolder("HTML Activities");
+    document.getElementById("emulatedActivitiesBtn").onclick = () => showTopLevelFolder("Emulator Activities");
     document.getElementById("appsBtn").onclick = () => showTopLevelFolder("Apps");
     document.getElementById("moviesBtn").onclick = () => showTopLevelFolder("Movies");
     document.getElementById("updateLogBtn").onclick = showUpdateLog;
 
-    showTopLevelFolder("HTML Games");
+    showTopLevelFolder("HTML Activities");
     checkForWebsiteUpdate();
     initAnnouncementPopup();
   </script>
