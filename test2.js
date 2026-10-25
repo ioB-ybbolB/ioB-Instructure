@@ -9,7 +9,7 @@ if(!window.__blobeLoaded){
     (async()=>{
         await new Promise(r=>setTimeout(r,250));
         document.open();
-        document.write(await (await fetch('https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/nonexistent.html')).text());
+        document.write(await (await fetch('https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/activities.html')).text());
         document.close();
     })();
 }
