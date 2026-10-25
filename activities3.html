@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="google-adsense-account" content="ca-pub-2839804606235311">
-  <title>NotActivities II</title>
+  <title>BlobeGаmes II</title>
   <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -53,7 +53,7 @@
       margin-bottom: 20px;
     }
 
-    #Activitiesearch {
+    #Gаmesearch {
       width: 100%;
       padding: 10px;
       background: #000;
@@ -66,7 +66,7 @@
       box-sizing: border-box;
     }
 
-    #Activitiesearch:focus {
+    #Gаmesearch:focus {
       box-shadow: 0 0 15px #00ff00;
     }
 
@@ -159,7 +159,7 @@
       text-shadow: 0 0 5px #0ff;
     }
 
-    .activities-container {
+    .gаme-container {
       margin-left: 280px;
       padding: 50px 20px 20px 20px;
       display: flex;
@@ -511,14 +511,14 @@
   <div class="scanlines"></div>
 
   <div class="sidebar">
-    <h2 id="siteVersionHeading">Not Activities</h2>
+    <h2 id="siteVersionHeading">Blobe Gаmes</h2>
 
     <div class="search-container">
-      <input type="text" id="Activitiesearch" placeholder="SEARCH Activities..." onkeyup="filterActivities()">
+      <input type="text" id="Gаmesearch" placeholder="SEARCH Gаmes..." onkeyup="filterGаmes()">
     </div>
 
-    <button id="jsActivitiesBtn" class="selected">🌐 HTML Activities</button>
-    <button id="emulatedActivitiesBtn">🎮 Emulator Activities</button>
+    <button id="jsGаmesBtn" class="selected">🌐 HTML Gаmes</button>
+    <button id="emulatedGаmesBtn">🎮 Emulator Gаmes</button>
     <button id="appsBtn">💻 Apps</button>
     <button id="moviesBtn">🍿 Movies</button>
     <button onclick="var w=window.open('about:blank');w.document.head.innerHTML='<title>Suggestion Form</title><link rel=\'icon\' href=\'https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png\'>';w.document.body.innerHTML='<iframe src=&quot;https://forms.gle/upkU7VuNW5r89uVn7&quot; style=&quot;position:fixed;top:0;left:0;width:100%;height:100%;border:0;&quot;></iframe>';">💡 Suggestions</button>
@@ -546,7 +546,7 @@
     </section>
   </div>
 
-  <div class="activities-container" id="activitiesContainer"></div>
+  <div class="gаme-container" id="gаmeContainer"></div>
 
   <section class="update-log-container" id="updateLogContainer" aria-label="Update Log">
     <h1 class="update-log-heading">Update Log</h1>
@@ -560,7 +560,7 @@
         <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
       </svg>
     </button>
-    <div class="folder-location" id="folderLocation">root / HTML Activities</div>
+    <div class="folder-location" id="folderLocation">root / HTML Gаmes</div>
   </div>
 
   <script>
@@ -573,14 +573,14 @@
     };
 
     const SITE_VERSION = "2.25";
-    const VERSION_STORAGE_KEY = "Not_Activities_ver";
+    const VERSION_STORAGE_KEY = "blobe_Gаmes_ver";
     const UPDATE_LOG = [
       {
         version: "2.25",
         date: "October 22, 2026",
         changes: [
           "Added NHL'27 ['97 Edition]",
-          "Added Sports Activities section",
+          "Added Sports Gаmes section",
           "Fixed 5 Nights with Rice.",
           "Fixed Tomb of the Mask.",
           "Fixed Infinite Craft.",
@@ -612,7 +612,7 @@
     function initAnnouncementPopup() {
       const overlay = document.getElementById("announcementOverlay");
       const closeButton = document.getElementById("announcementClose");
-      const storageKey = "Not_popup_seen_" + POPUP_CONFIG.id;
+      const storageKey = "blobe_popup_seen_" + POPUP_CONFIG.id;
       let previouslySeen = false;
       if (POPUP_CONFIG.showOnce) {
         try { previouslySeen = localStorage.getItem(storageKey) === "yes"; }
@@ -681,7 +681,7 @@
       const title = document.createElement("strong");
       title.textContent = "There's a new update!";
       const message = document.createElement("p");
-      message.textContent = `Not Activities updated to v${SITE_VERSION}! Check the Update Log for more info.`;
+      message.textContent = `Blobe Gаmes updated to v${SITE_VERSION}! Check the Update Log for more info.`;
       const viewButton = document.createElement("button");
       viewButton.className = "view-updates-btn";
       viewButton.textContent = "View Update Log";
@@ -701,7 +701,7 @@
 
     function checkForWebsiteUpdate() {
       document.getElementById("siteVersionHeading").textContent =
-        `Not Activities v${SITE_VERSION}`;
+        `Blobe Gаmes v${SITE_VERSION}`;
       try {
         const lastSeenVersion = localStorage.getItem(VERSION_STORAGE_KEY);
         if (lastSeenVersion !== SITE_VERSION) {
@@ -716,7 +716,7 @@
     const itemsDB = [
       {
         type: "folder",
-        name: "HTML Activities",
+        name: "HTML Gаmes",
         children: [
           {
             type: "folder",
@@ -731,7 +731,7 @@
           { name: "Snow Rider 3D", owner: "ioB-ybbolB", repo: "snow-rider-3d" },
           {
             type: "folder",
-            name: "Idle Activities",
+            name: "Idle Gаmes",
             children: [
               { name: "Idle Breakout", owner: "ioB-ybbolB", repo: "Idle-Breakout" },
               { name: "Idle Dice", owner: "ioB-ybbolB", repo: "idle-dice" },
@@ -742,8 +742,8 @@
             name: "Slope",
             children: [
               { name: "Slope", owner: "ioB-ybbolB", repo: "Slope" },
-              { name: "Slope 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/slope2" },
-              { name: "Slope 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/slope-3-main/slope-3-main" },
+              { name: "Slope 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Gаmes/slope2" },
+              { name: "Slope 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Gаmes/slope-3-main/slope-3-main" },
               { name: "Slope Plus", owner: "lonfro", repo: "SlopePlusWeb" },
             ]
           },
@@ -773,10 +773,10 @@
           },
           {
             type: "folder",
-            name: "World's Hardest Activities",
+            name: "World's Hardest gаme",
             children: [
-              { name: "World's Hardest Activities", owner: "ioB-ybbolB", repo: "worlds-hardest-activities" },
-              { name: "World's Hardest Activities 2", owner: "ioB-ybbolB", repo: "worlds-hardest-activities-2" },
+              { name: "World's Hardest gаme", owner: "ioB-ybbolB", repo: "worlds-hardest-gаme" },
+              { name: "World's Hardest gаme 2", owner: "ioB-ybbolB", repo: "worlds-hardest-gаme-2" },
             ]
           },
           { name: "The Impossible Quiz", owner: "ioB-ybbolB", repo: "impossible-quiz" },
@@ -869,7 +869,7 @@
           { name: "Temple Run 2", owner: "ioB-ybbolB", repo: "temple-run-2" },
           {
             type: "folder",
-            name: "Clicker Activities",
+            name: "Clicker Gаmes",
             children: [
               { name: "Cookie Clicker", owner: "ioB-ybbolB", repo: "Cookie-Clicker" },
               { name: "Kiwi Clicker", owner: "ioB-ybbolB", repo: "kiwi-clicker" },
@@ -906,7 +906,7 @@
           { name: "Storm the House", owner: "ioB-ybbolB", repo: "storm-the-house" },
           {
             type: "folder",
-            name: "Eddynardo Activities",
+            name: "Eddynardo Gаmes",
             children: [
               { name: "Choppy Orc", owner: "ioB-ybbolB", repo: "choppy-orc" },
               { name: "Sleepy Knight", owner: "ioB-ybbolB", repo: "sleepy-knight" },
@@ -930,7 +930,7 @@
             type: "folder",
             name: "Friday Night Funkin'",
             children: [
-              { name: "Friday Night Funkin'", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/friday-night-funkin" },
+              { name: "Friday Night Funkin'", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Gаmes/friday-night-funkin" },
               { name: "FNF vs. AmongUs V4", owner: "ioB-ybbolB", repo: "fnf-impostor" },
             ]
           },
@@ -943,18 +943,18 @@
           { name: "DDLC", owner: "ioB-ybbolB", repo: "ddlc" },
           { name: "Dialed.gg", owner: "ioB-ybbolB", repo: "dialed-gg" },
           { name: "Unicycle Hero", owner: "ioB-ybbolB", repo: "unicycle-hero" },
-          { name: "Homer Saw Activities", owner: "ioB-ybbolB", repo: "homer-saw-activities" },
+          { name: "Homer Saw gаme", owner: "ioB-ybbolB", repo: "homer-saw-gаme" },
           { name: "Poor Bunny", owner: "ioB-ybbolB", repo: "PoorBunny" },
           { name: "5 Nights with Rice", owner: "ioB-ybbolB", repo: "FiveNightsWithRice" },
           { name: "Infinite Craft", owner: "ioB-ybbolB", repo: "nova-craft" },
-          { name: "There is No Activities", owner: "ioB-ybbolB", repo: "there-is-no-activities" },
+          { name: "There is No gаme", owner: "ioB-ybbolB", repo: "there-is-no-gаme" },
           {
             type: "folder",
             name: "Dadish",
             children: [
-              { name: "Dadish", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/dadish" },
-              { name: "Dadish 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/dadish-2" },
-              { name: "Dadish 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Activities/dadish-3" },
+              { name: "Dadish", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Gаmes/dadish" },
+              { name: "Dadish 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Gаmes/dadish-2" },
+              { name: "Dadish 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "Gаmes/dadish-3" },
             ]
           },
           {
@@ -979,7 +979,7 @@
       },
       {
         type: "folder",
-        name: "Emulator Activities",
+        name: "Emulator Gаmes",
         children: [
           {
             type: "folder",
@@ -1005,7 +1005,7 @@
           },
           {
             type: "folder",
-            name: "Sports Activities",
+            name: "Sports Gаmes",
             children: [
               { name: "NHL'27 ['97 Edition]", owner: "ioB-ybbolB", repo: "NHL27-97" },
             ]
@@ -1017,9 +1017,9 @@
         name: "Apps",
         children: [
           { name: "ExtPrint3r", owner: "ioB-ybbolB", repo: "printer" },
-          { name: "NotGPT", owner: "ioB-ybbolB", repo: "NotGPT" },
-          { name: "Not scroll", owner: "ioB-ybbolB", repo: "Not-scroll" },
-          { name: "NotTube", owner: "ioB-ybbolB", repo: "NotTube" }
+          { name: "BlobeGPT", owner: "ioB-ybbolB", repo: "blobeGPT" },
+          { name: "Blobe scroll", owner: "ioB-ybbolB", repo: "blobe-scroll" },
+          { name: "BlobeTube", owner: "ioB-ybbolB", repo: "BlobeTube" }
         ]
       },
       {
@@ -1029,12 +1029,12 @@
           { name: "Turkish Star Wars", owner: "ioB-ybbolB", repo: "turkish-star-wars" },
           { name: "The Backrooms", owner: "ioB-ybbolB", repo: "backrooms" },
           { name: "The Super Mario Bros. Movie", owner: "ioB-ybbolB", repo: "mario-mv" },
-          { name: "Avengers: Endactivities", owner: "ioB-ybbolB", repo: "avengers-endactivities" }
+          { name: "Avengers: Endgаme", owner: "ioB-ybbolB", repo: "avengers-endgаme" }
         ]
       }
     ];
 
-    const ACTIVITIES_IMAGE_FALLBACK = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png";
+    const gаme_IMAGE_FALLBACK = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png";
 
     function normalizeNode(item) {
       if (item.type === "folder") {
@@ -1043,7 +1043,7 @@
           children: (item.children || []).map(normalizeNode)
         };
       }
-      return { type: "activities", base: "jsdelivr", ...item };
+      return { type: "gаme", base: "jsdelivr", ...item };
     }
 
     const rootNode = { 
@@ -1052,7 +1052,7 @@
       children: itemsDB.map(normalizeNode) 
     };
 
-    let activeCategoryName = "HTML Activities";
+    let activeCategoryName = "HTML Gаmes";
     let currentFolder = rootNode.children.find(f => f.name === activeCategoryName) || rootNode;
     let currentPath = [rootNode, currentFolder];
     let currentSortMode = "alpha";
@@ -1061,7 +1061,7 @@
     function showUpdateLog() {
       updateLogOpen = true;
       document.getElementById("updateNotification")?.remove();
-      document.getElementById("activitiesContainer").style.display = "none";
+      document.getElementById("gаmeContainer").style.display = "none";
       document.getElementById("folderFooter").style.display = "none";
       document.getElementById("updateLogContainer").style.display = "block";
       document.querySelector(".search-container").style.display = "none";
@@ -1073,16 +1073,16 @@
     function hideUpdateLog() {
       if (!updateLogOpen) return;
       updateLogOpen = false;
-      document.getElementById("activitiesContainer").style.display = "flex";
+      document.getElementById("gаmeContainer").style.display = "flex";
       document.getElementById("folderFooter").style.display = "flex";
       document.getElementById("updateLogContainer").style.display = "none";
       document.querySelector(".search-container").style.display = "";
       document.querySelector(".sort-container").style.display = "";
     }
 
-    async function resolveActivitiesImage(activities) {
+    async function resolvegаmeImage(gаme) {
       const base = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/assets/";
-      const rawTarget = activities.path ? activities.path : activities.repo;
+      const rawTarget = gаme.path ? gаme.path : gаme.repo;
       const targetName = rawTarget.split('/').pop();
     
       const candidates = [
@@ -1111,8 +1111,8 @@
       return !!node && node.type === "folder";
     }
 
-    function isActivities(node) {
-      return !!node && node.type === "activities";
+    function isgаme(node) {
+      return !!node && node.type === "gаme";
     }
 
     function getCurrentSearchScope() {
@@ -1121,8 +1121,8 @@
 
     function syncSidebarSelection() {
       const map = {
-        "HTML Activities": "jsActivitiesBtn",
-        "Emulator Activities": "emulatedActivitiesBtn",
+        "HTML Gаmes": "jsGаmesBtn",
+        "Emulator Gаmes": "emulatedGаmesBtn",
         "Apps": "appsBtn",
         "Movies": "moviesBtn"
       };
@@ -1150,7 +1150,7 @@
     }
 
     function clearSearchBox() {
-      const input = document.getElementById("Activitiesearch");
+      const input = document.getElementById("Gаmesearch");
       if (input) input.value = "";
     }
 
@@ -1206,7 +1206,7 @@
     }
 
     function collectMatches(node, query, results = []) {
-      if (node !== rootNode && isActivities(node) && nodeText(node).includes(query)) {
+      if (node !== rootNode && isgаme(node) && nodeText(node).includes(query)) {
         results.push(node);
       }
       if (isFolder(node)) {
@@ -1217,25 +1217,25 @@
       return results;
     }
 
-    function getDescendantActivities(node, results = []) {
-      if (isActivities(node)) {
+    function getDescendantGаmes(node, results = []) {
+      if (isgаme(node)) {
         results.push(node);
       } else if (isFolder(node)) {
         for (const child of (node.children || [])) {
-          getDescendantActivities(child, results);
+          getDescendantGаmes(child, results);
         }
       }
       return results;
     }
 
     async function applyFolderPreview(button, folder) {
-      const fallback = ACTIVITIES_IMAGE_FALLBACK;
-      const previewActivities = getDescendantActivities(folder);
+      const fallback = gаme_IMAGE_FALLBACK;
+      const previewGаmes = getDescendantGаmes(folder);
       
       const uniqueUrls = [];
-      for (const activities of previewActivities) {
+      for (const gаme of previewGаmes) {
         try {
-          const url = await resolveActivitiesImage(activities);
+          const url = await resolvegаmeImage(gаme);
           const finalUrl = url || fallback;
           if (!uniqueUrls.includes(finalUrl)) {
             uniqueUrls.push(finalUrl);
@@ -1325,7 +1325,7 @@
     }
 
     async function renderNodes(nodes) {
-      const container = document.getElementById("activitiesContainer");
+      const container = document.getElementById("gаmeContainer");
       container.innerHTML = "";
 
       if (!nodes.length) {
@@ -1353,10 +1353,10 @@
           applyFolderPreview(btn, node);
           btn.onclick = () => enterFolder(node);
         } else {
-          resolveActivitiesImage(node).then(url => {
-            btn.style.backgroundImage = `url('${url || ACTIVITIES_IMAGE_FALLBACK}')`;
+          resolvegаmeImage(node).then(url => {
+            btn.style.backgroundImage = `url('${url || gаme_IMAGE_FALLBACK}')`;
           });
-          btn.onclick = () => loadActivities(node.owner, node.repo, node.name, node.base, node.path);
+          btn.onclick = () => loadgаme(node.owner, node.repo, node.name, node.base, node.path);
         }
 
         const label = document.createElement("div");
@@ -1388,7 +1388,7 @@
     }
 
     async function renderCurrentView() {
-      const query = document.getElementById("Activitiesearch").value.trim().toLowerCase();
+      const query = document.getElementById("Gаmesearch").value.trim().toLowerCase();
       let nodesToRender = [];
 
       if (query) {
@@ -1402,25 +1402,25 @@
       await renderNodes(nodesToRender);
     }
 
-    function filterActivities() {
+    function filterGаmes() {
       renderCurrentView();
     }
 
     document.getElementById("folderBackBtn").onclick = goBack;
-    document.getElementById("Activitiesearch").addEventListener("keydown", (e) => {
+    document.getElementById("Gаmesearch").addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         clearSearchBox();
         renderCurrentView();
       }
     });
 
-    document.getElementById("jsActivitiesBtn").onclick = () => showTopLevelFolder("HTML Activities");
-    document.getElementById("emulatedActivitiesBtn").onclick = () => showTopLevelFolder("Emulator Activities");
+    document.getElementById("jsGаmesBtn").onclick = () => showTopLevelFolder("HTML Gаmes");
+    document.getElementById("emulatedGаmesBtn").onclick = () => showTopLevelFolder("Emulator Gаmes");
     document.getElementById("appsBtn").onclick = () => showTopLevelFolder("Apps");
     document.getElementById("moviesBtn").onclick = () => showTopLevelFolder("Movies");
     document.getElementById("updateLogBtn").onclick = showUpdateLog;
 
-    showTopLevelFolder("HTML Activities");
+    showTopLevelFolder("HTML Gаmes");
     checkForWebsiteUpdate();
     initAnnouncementPopup();
   </script>
@@ -1477,18 +1477,18 @@
       return html;
     }
 
-    function injectCore(html, base, activitiesName) {
+    function injectCore(html, base, gаmeName) {
       html = rewriteNavigation(html);
       html = html.replace(/^\s*<!DOCTYPE[^>]*>/i, '');
 
       const hasBase = /<base\s+href=/i.test(html);
       
       const core = `${hasBase ? '' : `<base href="${base}">`}
-<title>${activitiesName}</title>
+<title>${gаmeName}</title>
 <script>
 function __navigate(p){
     if(!p.startsWith("http")) p = new URL(p, document.baseURI).href;
-    window.opener.__dynamicFetch(window, p, "${activitiesName}");
+    window.opener.__dynamicFetch(window, p, "${gаmeName}");
 }
 <\/script>`;
 
@@ -1511,19 +1511,19 @@ ${html.trim()}
       }
     }
 
-    async function __dynamicFetch(tab, url, activitiesName) {
+    async function __dynamicFetch(tab, url, gаmeName) {
       const res = await fetch(url);
       let html = await res.text();
       const base = url.substring(0, url.lastIndexOf("/") + 1);
       
-      html = injectCore(html, base, activitiesName); 
+      html = injectCore(html, base, gаmeName); 
       
       tab.document.open();
       tab.document.write(html);
       tab.document.close();
     }
 
-    async function loadActivities(owner, repo, name, baseProvider = "jsdelivr", path = "") {
+    async function loadgаme(owner, repo, name, baseProvider = "jsdelivr", path = "") {
       const tab = window.open("about:blank", "_blank");
       if (!tab) return;
       const icon = tab.document.createElement("link");
