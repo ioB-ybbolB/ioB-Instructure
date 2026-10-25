@@ -546,7 +546,7 @@
     </section>
   </div>
 
-  <div class="game-container" id="activityContainer"></div>
+  <div class="game-container" id="gameContainer"></div>
 
   <section class="update-log-container" id="updateLogContainer" aria-label="Update Log">
     <h1 class="update-log-heading">Update Log</h1>
@@ -713,327 +713,7 @@
       }
     }
 
-    const itemsDB = [
-      {
-        type: "folder",
-        name: "HTML Games",
-        children: [
-          {
-            type: "folder",
-            name: "Run",
-            children: [
-              { name: "Run", owner: "ioB-ybbolB", repo: "Run" },
-              { name: "Run 2", owner: "ioB-ybbolB", repo: "Run-2" },
-              { name: "Run 3", owner: "ioB-ybbolB", repo: "Run-3" },
-            ]
-          },
-          { name: "Cat Mario", owner: "ioB-ybbolB", repo: "Cat-Mario" },
-          { name: "Snow Rider 3D", owner: "ioB-ybbolB", repo: "snow-rider-3d" },
-          {
-            type: "folder",
-            name: "Idle Games",
-            children: [
-              { name: "Idle Breakout", owner: "ioB-ybbolB", repo: "Idle-Breakout" },
-              { name: "Idle Dice", owner: "ioB-ybbolB", repo: "idle-dice" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Slope",
-            children: [
-              { name: "Slope", owner: "ioB-ybbolB", repo: "Slope" },
-              { name: "Slope 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/slope2" },
-              { name: "Slope 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/slope-3-main/slope-3-main" },
-              { name: "Slope Plus", owner: "lonfro", repo: "SlopePlusWeb" },
-            ]
-          },
-          { name: "BitLife", owner: "ioB-ybbolB", repo: "BitLife" },
-          { name: "Paper.io 2", owner: "ioB-ybbolB", repo: "Paper-io-2" },
-          { name: "Minecraft (Resent)", owner: "ioB-ybbolB", repo: "resent" },
-          { name: "Gunspin", owner: "ioB-ybbolB", repo: "gunspin" },
-          { name: "Getaway Shootout", owner: "ioB-ybbolB", repo: "getaway-shootout" },
-          { name: "Rooftop Snipers", owner: "ioB-ybbolB", repo: "rooftop-snipers" },
-          { name: "Baldi's Basics", owner: "ioB-ybbolB", repo: "baldi" },
-          { name: "Drive Mad", owner: "ioB-ybbolB", repo: "drive-mad" },
-          { name: "Cluster Rush", owner: "ioB-ybbolB", repo: "cluster-rush" },
-          { name: "Core Ball", owner: "ioB-ybbolB", repo: "core-ball" },
-          { name: "Tomb of the Mask", owner: "ioB-ybbolB", repo: "totm" },
-          { name: "Subway Surfers", owner: "ioB-ybbolB", repo: "subway-surfers" },
-          {
-            type: "folder",
-            name: "Fireboy and Watergirl",
-            children: [
-              { name: "Fireboy & Watergirl", owner: "ioB-ybbolB", repo: "fbwg" },
-              { name: "Fireboy & Watergirl 2", owner: "ioB-ybbolB", repo: "fbwg", path: "fbwg-2" },
-              { name: "Fireboy & Watergirl 3", owner: "ioB-ybbolB", repo: "fbwg", path: "fbwg-3" },
-              { name: "Fireboy & Watergirl 4", owner: "ioB-ybbolB", repo: "fbwg", path: "fbwg-4" },
-              { name: "Fireboy & Watergirl 5", owner: "ahrdevelopers", repo: "fireboy-and-watergirl-5-elements" },
-              { name: "Fireboy & Watergirl 6", owner: "ahrdevelopers", repo: "fireboy-watergirl-6-fairy-tales" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "World's Hardest Game",
-            children: [
-              { name: "World's Hardest Game", owner: "ioB-ybbolB", repo: "worlds-hardest-game" },
-              { name: "World's Hardest Game 2", owner: "ioB-ybbolB", repo: "worlds-hardest-game-2" },
-            ]
-          },
-          { name: "The Impossible Quiz", owner: "ioB-ybbolB", repo: "impossible-quiz" },
-          {
-            type: "folder",
-            name: "Duck Life",
-            children: [
-              { name: "Duck Life", owner: "ioB-ybbolB", repo: "duck-life" },
-              { name: "Duck Life 2", owner: "ioB-ybbolB", repo: "duck-life-2" },
-              { name: "Duck Life 3", owner: "ioB-ybbolB", repo: "duck-life-3" },
-              { name: "Duck Life 4", owner: "ioB-ybbolB", repo: "duck-life-4" },
-              { name: "Duck Life 5", owner: "ioB-ybbolB", repo: "duck-life-5" },
-              { name: "Duck Life 6", owner: "ioB-ybbolB", repo: "duck-life-6" },
-              { name: "Duck Life 7", owner: "ioB-ybbolB", repo: "duck-life-7" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Learn to Fly",
-            children: [
-              { name: "Learn to Fly", owner: "ioB-ybbolB", repo: "learn-to-fly" },
-              { name: "Learn to Fly 2", owner: "ioB-ybbolB", repo: "learn-to-fly-2" },
-              { name: "Learn to Fly 3", owner: "ioB-ybbolB", repo: "learn-to-fly-3" },
-            ]
-          },
-          { name: "Bloxorz", owner: "ioB-ybbolB", repo: "bloxorz" },
-          {
-            type: "folder",
-            name: "Riddle School",
-            children: [
-              { name: "Riddle School", owner: "ioB-ybbolB", repo: "riddle-school" },
-              { name: "Riddle School 2", owner: "ioB-ybbolB", repo: "riddle-school", path: "riddle-school-2" },
-              { name: "Riddle School 3", owner: "ioB-ybbolB", repo: "riddle-school", path: "riddle-school-3" },
-              { name: "Riddle School 4", owner: "ioB-ybbolB", repo: "riddle-school", path: "riddle-school-4" },
-              { name: "Riddle School 5", owner: "ioB-ybbolB", repo: "riddle-school", path: "riddle-school-5" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Bloons",
-            children: [
-              { name: "Bloons (Original)", owner: "ioB-ybbolB", repo: "bloons" },
-              { name: "Bloons Tower Defense 5", owner: "ioB-ybbolB", repo: "bloons-td-5" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Hollow Knight",
-            children: [
-              { name: "Hollow Knight", owner: "ioB-ybbolB", repo: "hollow-knight" },
-              { name: "Hollow Knight: Silksong", owner: "web-ports", repo: "hollow-knight-silksong" },
-            ]
-          },
-          { name: "N-Gon", owner: "ioB-ybbolB", repo: "n-gon" },
-          { name: "Celeste", owner: "ioB-ybbolB", repo: "celeste" },
-          { name: "Drift Boss", owner: "ioB-ybbolB", repo: "drift-boss" },
-          {
-            type: "folder",
-            name: "Geometry Dash",
-            children: [
-              { name: "Geometry Dash", owner: "ioB-ybbolB", repo: "geometry" },
-              { name: "Geometry Lite", owner: "ioB-ybbolB", repo: "geometry-lite" },
-              { name: "Geometry Lite Meltdown", owner: "ioB-ybbolB", repo: "geometry-lite-meltdown" },
-              { name: "Geometry Lite World", owner: "ioB-ybbolB", repo: "geometry-lite-world" },
-              { name: "Geometry Lite Subzero", owner: "ioB-ybbolB", repo: "geometry-lite-subzero" },
-              { name: "Web Dash", owner: "web-dashers", repo: "webdashers.dev" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Retro Bowl",
-            children: [
-              { name: "Retro Bowl", owner: "ioB-ybbolB", repo: "retro-bowl" },
-              { name: "Retro Bowl College", owner: "ioB-ybbolB", repo: "retro-bowl-college" },
-            ]
-          },
-          { name: "Poly Track", owner: "ioB-ybbolB", repo: "poly-track" },
-          { name: "Monkey Mart", owner: "ioB-ybbolB", repo: "monkey-mart" },
-          { name: "Angry Birds", owner: "ioB-ybbolB", repo: "angry-birds" },
-          { name: "Crazy Cattle 3D", owner: "ioB-ybbolB", repo: "crazy-cattle-3d" },
-          { name: "Tag", owner: "ioB-ybbolB", repo: "Tag" },
-          {
-            type: "folder",
-            name: "Vex",
-            children: [
-              { name: "Vex 7", owner: "ioB-ybbolB", repo: "vex7" },
-              { name: "Vex 8", owner: "ioB-ybbolB", repo: "vex8" },
-            ]
-          },
-          { name: "Temple Run 2", owner: "ioB-ybbolB", repo: "temple-run-2" },
-          {
-            type: "folder",
-            name: "Clicker Games",
-            children: [
-              { name: "Cookie Clicker", owner: "ioB-ybbolB", repo: "Cookie-Clicker" },
-              { name: "Kiwi Clicker", owner: "ioB-ybbolB", repo: "kiwi-clicker" },
-              { name: "Capybara Clicker", owner: "bubbls", repo: "UGS-Assets", path: "capybara clicker" },
-            ]
-          },
-          { name: "Chrome Dino", owner: "ioB-ybbolB", repo: "chrome-dino" },
-          { name: "Flappy Bird", owner: "ioB-ybbolB", repo: "flappy-bird" },
-          { name: "Stickman Hook", owner: "ioB-ybbolB", repo: "Stickman-Hook" },
-          { name: "Fruit Ninja", owner: "ioB-ybbolB", repo: "fruit-ninja" },
-          { name: "Jetpack Joyride", owner: "ioB-ybbolB", repo: "jetpack-joyride" },
-          {
-            type: "folder",
-            name: "Time Shooter",
-            children: [
-              { name: "Time Shooter 2", owner: "ioB-ybbolB", repo: "Time-Shooter-2" },
-              { name: "Time Shooter 3", owner: "ioB-ybbolB", repo: "Time-Shooter-3" },
-            ]
-          },
-          { name: "Granny", owner: "ioB-ybbolB", repo: "granny" },
-          { name: "Color Switch 2", owner: "ioB-ybbolB", repo: "color-switch-2-challenges" },
-          {
-            type: "folder",
-            name: "Sports Random",
-            children: [
-              { name: "Basket Random", owner: "ioB-ybbolB", repo: "Basket-Random" },
-              { name: "Soccer Random", owner: "ioB-ybbolB", repo: "Soccer-Random" },
-              { name: "Boxing Random", owner: "ioB-ybbolB", repo: "Boxing-Random" },
-              { name: "Volley Random", owner: "ioB-ybbolB", repo: "Volley-Random" },
-            ]
-          },
-          { name: "5 Nights at Epstein's", owner: "ioB-ybbolB", repo: "5-nights-at-epsteins" },
-          { name: "Deltarune", owner: "ioB-ybbolB", repo: "web-port", path: "deltarune" },
-          { name: "Storm the House", owner: "ioB-ybbolB", repo: "storm-the-house" },
-          {
-            type: "folder",
-            name: "Eddynardo Games",
-            children: [
-              { name: "Choppy Orc", owner: "ioB-ybbolB", repo: "choppy-orc" },
-              { name: "Sleepy Knight", owner: "ioB-ybbolB", repo: "sleepy-knight" },
-              { name: "Greedy Mimic", owner: "ioB-ybbolB", repo: "greedy-mimic" },
-            ]
-          },
-          { name: "MotoX3M", owner: "ioB-ybbolB", repo: "motox3m" },
-          { name: "FNAF 2", owner: "ioB-ybbolB", repo: "fnaf-2" },
-          {
-            type: "folder",
-            name: "Gun Mayhem",
-            children: [
-              { name: "Gun Mayhem", owner: "ioB-ybbolB", repo: "gun-mayhem" },
-              { name: "Gun Mayhem 2", owner: "ioB-ybbolB", repo: "gun-mayhem-2" },
-            ]
-          },
-          { name: "Stick War: Legacy", owner: "ioB-ybbolB", repo: "stick-war" },
-          { name: "Plants vs. Zombies", owner: "ioB-ybbolB", repo: "plants-vs-zombies" },
-          { name: "Basketball Stars", owner: "ioB-ybbolB", repo: "basketball-stars" },
-          {
-            type: "folder",
-            name: "Friday Night Funkin'",
-            children: [
-              { name: "Friday Night Funkin'", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/friday-night-funkin" },
-              { name: "FNF vs. AmongUs V4", owner: "ioB-ybbolB", repo: "fnf-impostor" },
-            ]
-          },
-          { name: "Ages of Conflict", owner: "ioB-ybbolB", repo: "ages-of-conflict" },
-          { name: "Crossy Road", owner: "ioB-ybbolB", repo: "crossy-road" },
-          { name: "Block Blast", owner: "ioB-ybbolB", repo: "block-blast" },
-          { name: "Stephen Hawking Sim.", owner: "ioB-ybbolB", repo: "stephen-hawking" },
-          { name: "Super Liquid Soccer", owner: "ioB-ybbolB", repo: "super-liquid-soccer" },
-          { name: "Football Legends", owner: "ioB-ybbolB", repo: "football-legends" },
-          { name: "DDLC", owner: "ioB-ybbolB", repo: "ddlc" },
-          { name: "Dialed.gg", owner: "ioB-ybbolB", repo: "dialed-gg" },
-          { name: "Unicycle Hero", owner: "ioB-ybbolB", repo: "unicycle-hero" },
-          { name: "Homer Saw Game", owner: "ioB-ybbolB", repo: "homer-saw-game" },
-          { name: "Poor Bunny", owner: "ioB-ybbolB", repo: "PoorBunny" },
-          { name: "5 Nights with Rice", owner: "ioB-ybbolB", repo: "FiveNightsWithRice" },
-          { name: "Infinite Craft", owner: "ioB-ybbolB", repo: "nova-craft" },
-          { name: "There is No Game", owner: "ioB-ybbolB", repo: "there-is-no-game" },
-          {
-            type: "folder",
-            name: "Dadish",
-            children: [
-              { name: "Dadish", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/dadish" },
-              { name: "Dadish 2", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/dadish-2" },
-              { name: "Dadish 3", owner: "ioB-ybbolB", repo: "bulbasaurchat-fork", path: "games/dadish-3" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Cut the Rope",
-            children: [
-              { name: "Cut the Rope", owner: "ioB-ybbolB", repo: "ctr", path: "og" },
-              { name: "Cut the Rope: Holiday Gift", owner: "ioB-ybbolB", repo: "ctr", path: "holiday" },
-              { name: "Cut the Rope: Time Travel", owner: "ioB-ybbolB", repo: "ctr", path: "time-travel" },
-            ]
-          },
-          { name: "Cuphead", owner: "web-ports", repo: "cuphead" },
-          { name: "Just Shapes & Beats", owner: "web-ports", repo: "jsab" },
-          { name: "Gorilla Tag", owner: "web-ports", repo: "gorilla-tag" },
-          { name: "Terraria", owner: "web-ports", repo: "terraria" },
-          { name: "Slither.io", owner: "zukahai", repo: "slither.io" },
-          { name: "Sporcle World Quiz", owner: "ioB-ybbolB", repo: "sporcle" },
-          { name: "Body Drop 3D", owner: "ioB-ybbolB", repo: "body-drop-3d" },
-          { name: "Undertale", owner: "ioB-ybbolB", repo: "web-port", path: "undertale" },
-          { name: "Obby Ragdoll", owner: "ioB-ybbolB", repo: "obby-ragdoll" },
-        ]
-      },
-      {
-        type: "folder",
-        name: "Emulator Games",
-        children: [
-          {
-            type: "folder",
-            name: "Super Mario",
-            children: [
-              { name: "Super Mario Bros", owner: "ioB-ybbolB", repo: "Mario" },
-              { name: "Super Mario Bros 3", owner: "ioB-ybbolB", repo: "Mario3" },
-              { name: "Super Mario World", owner: "ioB-ybbolB", repo: "MarioWorld" },
-              { name: "Super Mario 64", owner: "ioB-ybbolB", repo: "mario-64" },
-              { name: "New Super Mario Bros", owner: "ioB-ybbolB", repo: "new-mario" },
-            ]
-          },
-          {
-            type: "folder",
-            name: "Pokemon",
-            children: [
-              { name: "Pokemon Ruby", owner: "ioB-ybbolB", repo: "pokemon-ruby" },
-              { name: "Pokemon Sapphire", owner: "ioB-ybbolB", repo: "pokemon-sapphire" },
-              { name: "Pokemon Emerald", owner: "ioB-ybbolB", repo: "pokemon-emerald" },
-              { name: "Pokemon Platinum", owner: "ioB-ybbolB", repo: "pokemon-platinum" },
-              { name: "Pokemon Radical Red", owner: "ioB-ybbolB", repo: "pokemon-radical-red" }
-            ]
-          },
-          {
-            type: "folder",
-            name: "Sports Games",
-            children: [
-              { name: "NHL'27 ['97 Edition]", owner: "ioB-ybbolB", repo: "NHL27-97" },
-            ]
-          },
-        ]
-      },
-      {
-        type: "folder",
-        name: "Apps",
-        children: [
-          { name: "ExtPrint3r", owner: "ioB-ybbolB", repo: "printer" },
-          { name: "BlobeGPT", owner: "ioB-ybbolB", repo: "blobeGPT" },
-          { name: "Blobe scroll", owner: "ioB-ybbolB", repo: "blobe-scroll" },
-          { name: "BlobeTube", owner: "ioB-ybbolB", repo: "BlobeTube" }
-        ]
-      },
-      {
-        type: "folder",
-        name: "Movies",
-        children: [
-          { name: "Turkish Star Wars", owner: "ioB-ybbolB", repo: "turkish-star-wars" },
-          { name: "The Backrooms", owner: "ioB-ybbolB", repo: "backrooms" },
-          { name: "The Super Mario Bros. Movie", owner: "ioB-ybbolB", repo: "mario-mv" },
-          { name: "Avengers: Endgame", owner: "ioB-ybbolB", repo: "avengers-endgame" }
-        ]
-      }
-    ];
-
+    const itemsDB = [];
     const GAME_IMAGE_FALLBACK = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/favicon.png";
 
     function normalizeNode(item) {
@@ -1061,7 +741,7 @@
     function showUpdateLog() {
       updateLogOpen = true;
       document.getElementById("updateNotification")?.remove();
-      document.getElementById("activityContainer").style.display = "none";
+      document.getElementById("gameContainer").style.display = "none";
       document.getElementById("folderFooter").style.display = "none";
       document.getElementById("updateLogContainer").style.display = "block";
       document.querySelector(".search-container").style.display = "none";
@@ -1073,7 +753,7 @@
     function hideUpdateLog() {
       if (!updateLogOpen) return;
       updateLogOpen = false;
-      document.getElementById("activityContainer").style.display = "flex";
+      document.getElementById("gameContainer").style.display = "flex";
       document.getElementById("folderFooter").style.display = "flex";
       document.getElementById("updateLogContainer").style.display = "none";
       document.querySelector(".search-container").style.display = "";
@@ -1325,7 +1005,7 @@
     }
 
     async function renderNodes(nodes) {
-      const container = document.getElementById("activityContainer");
+      const container = document.getElementById("gameContainer");
       container.innerHTML = "";
 
       if (!nodes.length) {
