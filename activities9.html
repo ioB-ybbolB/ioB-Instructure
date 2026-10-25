@@ -161,7 +161,7 @@
 
     .game-container {
       margin-left: 280px;
-      padding: 74px 20px 20px 20px;
+      padding: 50px 20px 20px 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -323,20 +323,98 @@
       opacity: 0.85;
     }
 
+    .announcement-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 10, 0.78);
+      backdrop-filter: blur(6px);
+      box-sizing: border-box;
+    }
+
+    .announcement-overlay.is-visible { 
+      display: flex; 
+    }
+
+    .announcement-dialog {
+      position: relative;
+      width: min(650px, 100%);
+      box-sizing: border-box;
+      padding: 36px 30px 30px;
+      border: 1px solid rgba(0, 255, 255, 0.55);
+      border-radius: 16px;
+      background: linear-gradient(160deg, #10262b, #071016 80%);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, 0.48);
+      font-family: "Roboto Mono", Arial, sans-serif;
+      text-align: center;
+      color: #c7f8fa;
+    }
+
+    .announcement-dialog h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: #0ff;
+      text-shadow: none;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .announcement-dialog p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.75;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .announcement-close {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 1px solid rgba(190, 235, 240, 0.22);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #c5e6e9;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .announcement-close svg { width: 17px; height: 17px; }
+    .announcement-close:hover {
+      background: rgba(0, 255, 255, 0.12);
+      border-color: rgba(0, 255, 255, 0.55);
+      color: #ffffff;
+    }
+    .announcement-close:focus-visible {
+      outline: 2px solid #00ffff;
+      outline-offset: 3px;
+    }
+
     .update-log-container {
       display: none;
       margin-left: 290px;
-      padding: 85px 34px 50px;
+      padding: 35px 35px 50px;
       text-align: left;
       max-width: 1050px;
       box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
+      font-family: "Roboto Mono", Arial, sans-serif;
     }
 
     .update-log-heading {
+      font-family: 'Orbitron', sans-serif;
       font-size: clamp(1.5rem, 3vw, 2.3rem);
       margin: 0 0 14px;
-      text-shadow: 0 0 12px #0ff;
+      text-shadow: none;
+      font-weight: 700;
     }
 
     .update-log-intro {
@@ -350,7 +428,7 @@
       background: rgba(0, 24, 32, 0.85);
       border: 1px solid rgba(0, 255, 255, 0.55);
       border-radius: 14px;
-      box-shadow: 0 0 18px rgba(0, 255, 255, 0.12);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.17);
       padding: 20px 24px;
       margin-bottom: 18px;
     }
@@ -374,7 +452,7 @@
       padding-left: 22px;
       margin: 0;
       line-height: 1.9;
-      font-size: 0.83rem;
+      font-size: 0.95rem;
       color: #c7f8fa;
     }
 
@@ -391,8 +469,8 @@
       background: #061519;
       color: #d9fcff;
       text-align: left;
-      font-family: 'Orbitron', sans-serif;
-      box-shadow: 0 0 26px rgba(0, 255, 255, 0.4);
+      font-family: "Roboto Mono", Arial, sans-serif;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
     }
 
     .update-notification strong { display: block; color: #0ff; padding-right: 20px; }
@@ -460,7 +538,15 @@
     
   </div>
 
-  <div class="game-container" id="gameContainer"></div>
+  <div class="announcement-overlay" id="announcementOverlay" aria-hidden="true">
+    <section class="announcement-dialog" role="dialog" aria-modal="true" aria-labelledby="announcementTitle" aria-describedby="announcementMessage">
+      <button class="announcement-close" id="announcementClose" type="button" aria-label="Close announcement"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <h2 id="announcementTitle"></h2>
+      <p id="announcementMessage"></p>
+    </section>
+  </div>
+
+  <div class="game-container" id="activityContainer"></div>
 
   <section class="update-log-container" id="updateLogContainer" aria-label="Update Log">
     <h1 class="update-log-heading">Update Log</h1>
@@ -478,13 +564,23 @@
   </div>
 
   <script>
-    const SITE_VERSION = "2.243";
+    const POPUP_CONFIG = {
+      enabled: false,
+      title: "Placeholder",
+      message: "This is a placeholder",
+      showOnce: true,
+      id: "placeholder-for-now"
+    };
+
+    const SITE_VERSION = "2.25";
     const VERSION_STORAGE_KEY = "blobe_games_ver";
     const UPDATE_LOG = [
       {
-        version: "2.244",
-        date: "October 19, 2026",
+        version: "2.25",
+        date: "October 22, 2026",
         changes: [
+          "Added NHL'27 ['97 Edition]",
+          "Added Sports Games section",
           "Fixed 5 Nights with Rice.",
           "Fixed Tomb of the Mask.",
           "Fixed Infinite Craft.",
@@ -512,6 +608,40 @@
         ]
       }
     ];
+
+    function initAnnouncementPopup() {
+      const overlay = document.getElementById("announcementOverlay");
+      const closeButton = document.getElementById("announcementClose");
+      const storageKey = "blobe_popup_seen_" + POPUP_CONFIG.id;
+      let previouslySeen = false;
+      if (POPUP_CONFIG.showOnce) {
+        try { previouslySeen = localStorage.getItem(storageKey) === "yes"; }
+        catch (error) { console.warn("Could not check popup preference:", error); }
+      }
+      if (!POPUP_CONFIG.enabled || previouslySeen) return;
+
+      document.getElementById("announcementTitle").textContent = POPUP_CONFIG.title;
+      document.getElementById("announcementMessage").textContent = POPUP_CONFIG.message;
+      overlay.classList.add("is-visible");
+      overlay.setAttribute("aria-hidden", "false");
+      closeButton.focus();
+
+      function closePopup() {
+        overlay.classList.remove("is-visible");
+        overlay.setAttribute("aria-hidden", "true");
+        if (POPUP_CONFIG.showOnce) {
+          try { localStorage.setItem(storageKey, "yes"); }
+          catch (error) { console.warn("Could not save popup preference:", error); }
+        }
+        document.removeEventListener("keydown", onKeydown);
+      }
+      function onKeydown(event) { if (event.key === "Escape") closePopup(); }
+      closeButton.addEventListener("click", closePopup);
+      overlay.addEventListener("click", event => {
+        if (event.target === overlay) closePopup();
+      });
+      document.addEventListener("keydown", onKeydown);
+    }
 
     function renderUpdateLog() {
       document.getElementById("updateLogIntro").textContent = `See what's new in ${SITE_VERSION}.`;
@@ -873,6 +1003,13 @@
               { name: "Pokemon Radical Red", owner: "ioB-ybbolB", repo: "pokemon-radical-red" }
             ]
           },
+          {
+            type: "folder",
+            name: "Sports Games",
+            children: [
+              { name: "NHL'27 ['97 Edition]", owner: "ioB-ybbolB", repo: "NHL27-97" },
+            ]
+          },
         ]
       },
       {
@@ -924,7 +1061,7 @@
     function showUpdateLog() {
       updateLogOpen = true;
       document.getElementById("updateNotification")?.remove();
-      document.getElementById("gameContainer").style.display = "none";
+      document.getElementById("activityContainer").style.display = "none";
       document.getElementById("folderFooter").style.display = "none";
       document.getElementById("updateLogContainer").style.display = "block";
       document.querySelector(".search-container").style.display = "none";
@@ -936,7 +1073,7 @@
     function hideUpdateLog() {
       if (!updateLogOpen) return;
       updateLogOpen = false;
-      document.getElementById("gameContainer").style.display = "flex";
+      document.getElementById("activityContainer").style.display = "flex";
       document.getElementById("folderFooter").style.display = "flex";
       document.getElementById("updateLogContainer").style.display = "none";
       document.querySelector(".search-container").style.display = "";
@@ -1188,7 +1325,7 @@
     }
 
     async function renderNodes(nodes) {
-      const container = document.getElementById("gameContainer");
+      const container = document.getElementById("activityContainer");
       container.innerHTML = "";
 
       if (!nodes.length) {
@@ -1285,6 +1422,7 @@
 
     showTopLevelFolder("HTML Games");
     checkForWebsiteUpdate();
+    initAnnouncementPopup();
   </script>
 
   <script>
