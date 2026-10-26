@@ -87,7 +87,7 @@
       position: relative;
       width: 60%;
     }
-    
+
     .sort-select-wrap::after {
       content: "▼";
       position: absolute;
@@ -99,7 +99,7 @@
       pointer-events: none;
       text-shadow: 0 0 5px #00ff00;
     }
-    
+
     #sortSelect {
       width: 100%;
       padding: 8px 32px 8px 8px;
@@ -116,7 +116,7 @@
       -webkit-appearance: none;
       -moz-appearance: none;
     }
-    
+
     #sortSelect::-ms-expand {
       display: none;
     }
@@ -352,8 +352,8 @@
       box-sizing: border-box;
     }
 
-    .announcement-overlay.is-visible { 
-      display: flex; 
+    .announcement-overlay.is-visible {
+      display: flex;
     }
 
     .announcement-dialog {
@@ -515,6 +515,39 @@
       padding: 3px 8px;
     }
 
+    .page-counter {
+      margin-left: 280px;
+      width: calc(100% - 280px);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .page-counter-label {
+      margin: 0 0 10px;
+      color: #00ffff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.75);
+    }
+
+    .page-counter img {
+      display: block;
+      width: 150px;
+      height: auto;
+      image-rendering: pixelated;
+      filter: url(#cyan-black-key) drop-shadow(0 0 6px #00ffff);
+      mix-blend-mode: screen;
+    }
+
     @media (max-width: 650px) {
       .update-log-container { padding: 80px 15px 40px; }
       .update-log-entry { padding: 15px; }
@@ -551,7 +584,6 @@
         </select>
       </div>
     </div>
-    
   </div>
 
   <div class="announcement-overlay" id="announcementOverlay" aria-hidden="true">
@@ -595,7 +627,8 @@
         version: "2.26",
         date: "October 25, 2026",
         changes: [
-          "Fixed the website being flagged after a few seconds."
+          "Fixed the website being flagged after a few seconds.",
+          "Improved and globalized page visits counter."
         ]
       },
       {
@@ -1069,10 +1102,10 @@
       return { type: "game", base: "jsdelivr", ...item };
     }
 
-    const rootNode = { 
-      type: "folder", 
-      name: "root", 
-      children: itemsDB.map(normalizeNode) 
+    const rootNode = {
+      type: "folder",
+      name: "root",
+      children: itemsDB.map(normalizeNode)
     };
 
     let activeCategoryName = "HTML Games";
@@ -1107,13 +1140,13 @@
       const base = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/assets/";
       const rawTarget = game.path ? game.path : game.repo;
       const targetName = rawTarget.split('/').pop();
-    
+
       const candidates = [
         `${base}${targetName}.png`,
         `${base}${targetName}.webp`,
         `${base}${targetName}.jpg`
       ];
-    
+
       return new Promise(resolve => {
         const img = new Image();
         let i = 0;
@@ -1254,7 +1287,7 @@
     async function applyFolderPreview(button, folder) {
       const fallback = GAME_IMAGE_FALLBACK;
       const previewGames = getDescendantGames(folder);
-      
+
       const uniqueUrls = [];
       for (const game of previewGames) {
         try {
@@ -1266,25 +1299,25 @@
         } catch (e) {}
         if (uniqueUrls.length >= 4) break;
       }
-    
+
       if (uniqueUrls.length === 0) {
         uniqueUrls.push(fallback);
       }
-    
+
       button.style.backgroundImage = '';
-    
+
       let previewGrid = button.querySelector('.folder-preview-grid');
       if (!previewGrid) {
         previewGrid = document.createElement('div');
         previewGrid.className = 'folder-preview-grid';
         button.style.position = 'relative';
         button.style.zIndex = '0';
-        
+
         button.prepend(previewGrid);
       }
-      
+
       previewGrid.innerHTML = '';
-    
+
       Object.assign(previewGrid.style, {
         position: 'absolute',
         top: '0',
@@ -1298,7 +1331,7 @@
         gridTemplateColumns: '1fr 1fr',
         gridTemplateRows: '1fr 1fr'
       });
-    
+
       const overlay = document.createElement('div');
       Object.assign(overlay.style, {
         position: 'absolute',
@@ -1310,7 +1343,7 @@
         zIndex: '1'
       });
       previewGrid.appendChild(overlay);
-    
+
       uniqueUrls.forEach((url, index) => {
         const img = document.createElement('img');
         img.src = url;
@@ -1320,7 +1353,7 @@
           objectFit: 'cover',
           zIndex: '0'
         });
-    
+
         if (uniqueUrls.length === 1) {
           img.style.gridColumn = '1 / span 2';
           img.style.gridRow = '1 / span 2';
@@ -1342,7 +1375,7 @@
           img.style.gridColumn = (index % 2 === 0) ? '1' : '2';
           img.style.gridRow = (index < 2) ? '1' : '2';
         }
-    
+
         previewGrid.appendChild(img);
       });
     }
@@ -1596,7 +1629,7 @@
     }
 
     function rewriteLargeAssets(html, owner, repo, ref) {
-      return html.replace(/(src|href)=["']([^"']+?\.(wasm|data|unityweb))["']/gi,
+      return html.replace(/(src|href)=["']([^"']+?.(wasm|data|unityweb))["']/gi,
       (m, a, path) => {
         if(/https?:/i.test(path)) return m;
         const raw = `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/` + path.replace(/^\/+/, "");
@@ -1622,7 +1655,7 @@
       html = html.replace(/^\s*<!DOCTYPE[^>]*>/i, '');
 
       const hasBase = /<base\s+href=/i.test(html);
-      
+
       const core = `${hasBase ? '' : `<base href="${base}">`}
 <title>${gameName}</title>
 <script>
@@ -1655,9 +1688,9 @@ ${html.trim()}
       const res = await fetch(url);
       let html = await res.text();
       const base = url.substring(0, url.lastIndexOf("/") + 1);
-      
-      html = injectCore(html, base, gameName); 
-      
+
+      html = injectCore(html, base, gameName);
+
       tab.document.open();
       tab.document.write(html);
       tab.document.close();
@@ -1690,7 +1723,7 @@ ${html.trim()}
                 height: 100vh;
                 overflow: hidden;
               }
-              
+
               .spinner {
                 width: 60px;
                 height: 60px;
@@ -1742,7 +1775,7 @@ ${html.trim()}
 
       const res = await fetch(index);
       let html = await res.text();
-      
+
       html = rewriteLargeAssets(html, owner, repo, ref);
       html = injectCore(html, base, name);
 
@@ -1752,8 +1785,23 @@ ${html.trim()}
     }
   </script>
 
-  <div style="pointer-events:none; user-select:none;">
-    <script type="text/javascript" src="https://counter.websiteout.com/js/2/6/0/0"></script>
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;overflow:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="cyan-black-key" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0 0 0 0 0
+        0 0 0 0 1
+        0 0 0 0 1
+        0.75 0.75 0.75 0 -0.12
+      "/>
+    </filter>
+  </svg>
+
+  <div class="page-counter">
+    <div class="page-counter-label">Page Visits:</div>
+    <img
+      src="https://counter.websiteout.com/compte.php?S=https://site.nhd.org/06712345&C=35"
+      alt="Page Visits Counter"
+    >
   </div>
 </body>
 </html>
