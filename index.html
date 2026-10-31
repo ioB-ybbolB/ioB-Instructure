@@ -1085,10 +1085,10 @@
         type: "folder",
         name: "Movies",
         children: [
-          { name: "Turkish Star Wars", owner: "ioB-ybbolB", repo: "turkish-star-wars" },
-          { name: "The Backrooms", owner: "ioB-ybbolB", repo: "backrooms" },
-          { name: "The Super Mario Bros. Movie", owner: "ioB-ybbolB", repo: "mario-mv" },
-          { name: "Avengers: Endgame", owner: "ioB-ybbolB", repo: "avengers-endgame" }
+          { name: "Turkish Star Wars", videoUrl: "https://quizizz.com/_media/uploadedFiles/ef3ff69f-6f3a-440a-b90c-14fb4ccfe9af-v2", thumbnail: "turkish-star-wars" },
+          { name: "The Backrooms", videoUrl: "https://quizizz.com/_media/uploadedFiles/dc8daff2-2f9b-43cc-9691-de756d6bdc1d-v2", thumbnail: "backrooms" },
+          { name: "The Super Mario Bros. Movie", videoUrl: "https://quizizz.com/_media/uploadedFiles/ae0c3814-b878-4e7b-a96a-f18c686a325f-v2", thumbnail: "mario-mv" },
+          { name: "Avengers: Endgame", videoUrl: "https://quizizz.com/_media/uploadedFiles/12b56f81-6968-4607-a0e7-964bc8ae583c-v2", thumbnail: "avengers-endgame" }
         ]
       }
     ];
@@ -1141,7 +1141,7 @@
 
     async function resolveGameImage(game) {
       const base = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/refs/heads/main/assets/";
-      const rawTarget = game.path ? game.path : game.repo;
+      const rawTarget = game.path || game.thumbnail || game.repo;
       const targetName = rawTarget.split('/').pop();
 
       const candidates = [
@@ -1534,7 +1534,9 @@
           resolveGameImage(node).then(url => {
             btn.style.backgroundImage = `url('${url || GAME_IMAGE_FALLBACK}')`;
           });
-          btn.onclick = () => loadGame(node.owner, node.repo, node.name, node.base, node.path);
+          btn.onclick = () => node.videoUrl !== undefined
+            ? loadMovie(node.videoUrl, node.name)
+            : loadGame(node.owner, node.repo, node.name, node.base, node.path);
         }
 
         const titlePng = makeTitlePng(node.name);
@@ -1661,6 +1663,7 @@
 
       const core = `${hasBase ? '' : `<base href="${base}">`}
 <title>${gameName}</title>
+<link rel="icon" href="https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/main/favicon.png">
 <script>
 function __navigate(p){
     if(!p.startsWith("http")) p = new URL(p, document.baseURI).href;
@@ -1697,6 +1700,23 @@ ${html.trim()}
       tab.document.open();
       tab.document.write(html);
       tab.document.close();
+    }
+
+    function loadMovie(videoUrl, name) {
+      const tab = window.open("about:blank", "_blank");
+      if (!tab) return;
+      tab.document.title = name;
+      const icon = tab.document.createElement("link");
+      icon.rel = "icon";
+      icon.href = "https://raw.githubusercontent.com/ioB-ybbolB/ioB-Instructure/main/favicon.png";
+      tab.document.head.appendChild(icon);
+      tab.document.body.style.margin = "0";
+      const iframe = tab.document.createElement("iframe");
+      iframe.src = videoUrl;
+      iframe.style.cssText = "display:block;width:100vw;height:100vh;border:0";
+      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+      iframe.allowFullscreen = true;
+      tab.document.body.appendChild(iframe);
     }
 
     async function loadGame(owner, repo, name, baseProvider = "jsdelivr", path = "") {
